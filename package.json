@@ -39,6 +39,7 @@
     "semantic-release": "^21.0.2"
   },
   "publishConfig": {
+    "access": "public",
     "provenance": true
   },
   "release": {
