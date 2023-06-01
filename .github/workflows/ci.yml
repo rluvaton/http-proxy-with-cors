@@ -3,15 +3,15 @@ on: [ push, pull_request ]
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
           registry-url: https://registry.npmjs.org
 
       - name: Log Environment
@@ -30,7 +30,7 @@ jobs:
         run: npm run lint
 
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: test
 
     # Run only on pushing to main
@@ -38,12 +38,12 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup NodeJS
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
           registry-url: https://registry.npmjs.org
 
       - name: Log Environment
