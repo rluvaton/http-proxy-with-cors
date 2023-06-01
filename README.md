@@ -1,22 +1,16 @@
-# NPM package Boilerplate
+# HTTP proxy with cors
 
-## Features:
+Proxy HTTP requests with cors enabled.
 
-- TypeScript
-- Vitest
-- ESLint
-- Prettier
-- Husky
-- CommitLint
-- CI in GitHub Action
-- Auto Deploy to NPM using `semantic-release`
+## Usage
 
-### Auto deploy to NPM
+```bash
+npx proxy-http-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upstream-n>
+```
 
-#### Setup
+It will create a proxy server on each local port that will proxy all requests to the upstream server.
 
-for it to work you need to add to your GitHub secrets the `NPM_TOKEN` variable with the NPM token to publish
 
-#### Removing that feature
+### Options
 
-If you want to remove that feature you need to delete the `deploy` job from the `.github/workflows/ci.yml` file
+To disable logging, set the `LOG_DISABLED` environment variable to `false`.

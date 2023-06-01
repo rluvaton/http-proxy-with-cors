@@ -1,47 +1,41 @@
 {
-  "name": "npm-package-boilerplate",
+  "name": "http-proxy-with-cors",
   "version": "0.0.0-development",
-  "description": "NodeJS boilerplate with TypeScript, Jest, ESLint, Prettier, Husky, CommitLint, CI in GitHub Action",
+  "description": "Proxy HTTP requests with CORS support",
   "keywords": [
-    "boilerplate",
-    "prettier",
-    "eslint",
-    "husky",
-    "commitlint",
-    "typescript",
-    "vitest"
+    "proxy-server",
+    "http"
   ],
-  "files": [
-    "lib"
-  ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "type": "module",
+  "bin": {
+    "proxy-http-with-cors": "./src/index.js"
+  },
+  "main": "src/index.js",
   "scripts": {
     "prepare": "husky install",
-    "build": "tsc -p tsconfig.build.json",
-    "clean": "rimraf lib",
-    "start": "ts-node src/index.ts",
-    "test": "vitest run",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "semantic-release": "semantic-release"
   },
+  "dependencies": {
+    "@fastify/cors": "^8.3.0",
+    "@fastify/http-proxy": "^9.1.0",
+    "chalk": "^5.2.0",
+    "fastify": "^4.17.0",
+    "pino-pretty": "^10.0.0"
+  },
   "devDependencies": {
-    "@vitest/coverage-c8": "^0.26.3",
-    "jest-extended": "^3.2.1",
-    "vitest": "^0.26.3",
+    "@types/node": "^20.2.5",
+    "nodemon": "^2.0.22",
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
-    "@faker-js/faker": "^7.6.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
     "prettier": "^2.8.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^4.9.4",
     "semantic-release": "^19.0.5"
   },
   "release": {
@@ -51,6 +45,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rluvaton/node-boilerplate.git"
-  }
+    "url": "https://github.com/rluvaton/http-proxy-with-cors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rluvaton/http-proxy-with-cors/issues"
+  },
+  "license": "MIT"
 }

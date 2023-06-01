@@ -1,6 +1,1 @@
 node_modules
-dist
-jest.config.json
-fixtures
-coverage
-__snapshots__
