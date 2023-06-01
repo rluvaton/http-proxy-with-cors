@@ -1,0 +1,56 @@
+{
+  "name": "npm-package-boilerplate",
+  "version": "0.0.0-development",
+  "description": "NodeJS boilerplate with TypeScript, Jest, ESLint, Prettier, Husky, CommitLint, CI in GitHub Action",
+  "keywords": [
+    "boilerplate",
+    "prettier",
+    "eslint",
+    "husky",
+    "commitlint",
+    "typescript",
+    "vitest"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "husky install",
+    "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf lib",
+    "start": "ts-node src/index.ts",
+    "test": "vitest run",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "@vitest/coverage-c8": "^0.26.3",
+    "jest-extended": "^3.2.1",
+    "vitest": "^0.26.3",
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@faker-js/faker": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "semantic-release": "^19.0.5"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rluvaton/node-boilerplate.git"
+  }
+}

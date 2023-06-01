@@ -1,0 +1,68 @@
+name: Node CI
+on: [ push, pull_request ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          registry-url: https://registry.npmjs.org
+
+      - name: Log Environment
+        run: |
+          echo "Node version $(node --version)"
+          echo "NPM version $(npm --version)"
+          echo "System Info $(uname -a)"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Format
+        run: npm run format
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: test
+
+    # Run only on pushing to main
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Setup NodeJS 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          registry-url: https://registry.npmjs.org
+
+      - name: Log Environment
+        run: |
+          echo "Node version $(node --version)"
+          echo "NPM version $(npm --version)"
+          echo "System Info $(uname -a)"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Release to NPM
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
