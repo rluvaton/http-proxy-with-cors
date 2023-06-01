@@ -15,7 +15,6 @@
     "prepare": "husky install",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo 'no tests yet'",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "eslint \"src/**/*.js\" --fix",
     "semantic-release": "semantic-release"

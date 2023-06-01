@@ -21,16 +21,13 @@ jobs:
           echo "System Info $(uname -a)"
 
       - name: Install Dependencies
-        run: npm ci
+        run: npm i
 
       - name: Format
         run: npm run format
 
       - name: Lint
         run: npm run lint
-
-      - name: Test
-        run: npm test
 
   deploy:
     runs-on: ubuntu-20.04
@@ -56,10 +53,7 @@ jobs:
           echo "System Info $(uname -a)"
 
       - name: Install Dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+        run: npm i
 
       - name: Release to NPM
         env:
