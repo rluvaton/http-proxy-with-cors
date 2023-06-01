@@ -35,6 +35,6 @@ Example config file:
 you can pass the server from a config file using (`-f` or `--file`) or pass them as `port` and `upstream` arguments.
 
 #### Logging
-To disable logging, set the `LOG_DISABLED` environment variable to `false`.
+To disable logging, set the `LOG_DISABLED` environment variable to `true`.
 
 

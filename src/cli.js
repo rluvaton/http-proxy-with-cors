@@ -10,7 +10,7 @@ Usage: proxy-http-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upst
 It will create a proxy server on each local port that will proxy all requests to the upstream server.
 
 Env vars:
-  - LOG_DISABLED: setting it to 'false' will disable logging
+  - LOG_DISABLED: setting it to 'true' will disable logging
 
 Options:
   -f, --file | a file path to a JSON file containing the servers configuration in the format: {port: number, upstream: string}[]

@@ -56,7 +56,7 @@ try {
 }
 
 start(servers, {
-  logEnabled: process.env.LOG_DISABLED !== 'false',
+  logEnabled: process.env.LOG_DISABLED !== 'true',
 })
   .then(() => {
     console.log('All servers started successfully');
