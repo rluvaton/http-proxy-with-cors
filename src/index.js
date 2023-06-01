@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { parseArgs, printHelp } from './cli.js';
 import { createError } from './error.js';
 import { runServer } from './server.js';
