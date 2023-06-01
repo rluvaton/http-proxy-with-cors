@@ -1,3 +1,6 @@
+permissions:
+  id-token: write # to enable use of OIDC for npm provenance
+
 name: Node CI
 on: [ push, pull_request ]
 
