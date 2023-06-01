@@ -46,8 +46,19 @@ export async function runServer(port, upstream, options = {}) {
   const fastify = await createServer({ upstream }, options);
   try {
     await fastify.listen({ host: '0.0.0.0', port: port });
+
+    if (!options.logEnabled) {
+      console.log(`Server listening on http://localhost:${fastify.server.address().port} and proxying to ${upstream}`);
+    }
   } catch (err) {
-    fastify.log.error(err);
+    if (!options.logEnabled) {
+      console.error(`Failed to start server listening on http://localhost:${port} and proxying to ${upstream}`, err);
+    } else {
+      fastify.log.error(
+        err,
+        `Failed to start server listening on http://localhost:${port} and proxying to ${upstream}`,
+      );
+    }
     process.exit(1);
   }
 }
