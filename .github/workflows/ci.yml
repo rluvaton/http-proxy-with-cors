@@ -8,10 +8,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Setup NodeJS 16
+      - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: '16'
+          node-version: '20'
           registry-url: https://registry.npmjs.org
 
       - name: Log Environment
@@ -40,10 +40,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Setup NodeJS 16
+      - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: '16'
+          node-version: '20'
           registry-url: https://registry.npmjs.org
 
       - name: Log Environment
