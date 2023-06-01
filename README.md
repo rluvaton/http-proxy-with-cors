@@ -1,5 +1,7 @@
 # HTTP proxy with cors
 
+[![npm](https://img.shields.io/npm/v/http-proxy-with-cors)](https://www.npmjs.com/package/http-proxy-with-cors)
+
 Proxy HTTP requests with cors enabled.
 
 ## Usage
@@ -7,12 +9,12 @@ It will create a proxy server on each local port that will proxy all requests to
 
 ### CLI arguments
 ```bash
-npx proxy-http-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upstream-n>
+npx http-proxy-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upstream-n>
 ```
 
 ### From file
 ```bash
-npx proxy-http-with-cors --file <path-to-json-file>
+npx http-proxy-with-cors --file <path-to-json-file>
 ```
 
 Example config file:

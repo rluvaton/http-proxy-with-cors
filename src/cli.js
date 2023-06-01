@@ -5,7 +5,7 @@ import { CLIError } from './error.js';
 
 export function printHelp() {
   console.log(`
-Usage: proxy-http-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upstream-n>
+Usage: http-proxy-with-cors <local-port-1> <upstream-1> ... <local-port-n> <upstream-n>
 
 It will create a proxy server on each local port that will proxy all requests to the upstream server.
 
