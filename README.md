@@ -4,6 +4,10 @@
 
 Proxy HTTP requests with cors enabled.
 
+At my company, sometimes we wanna run our local frontend against production, it's easier and faster, the problem is CORS
+
+So I created the following npm package that act as a proxy to multiple upstream servers built on top of fastifyjs so you wont feel it
+
 ## Usage
 It will create a proxy server on each local port that will proxy all requests to the upstream server.
 
