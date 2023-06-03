@@ -35,10 +35,6 @@ async function createServer({ upstream }, options) {
     httpMethods: ['DELETE', 'GET', 'HEAD', 'PATCH', 'POST', 'PUT'],
   });
 
-  fastify.addHook('onResponse', (request, reply, done) => {
-    done();
-  });
-
   return fastify;
 }
 
