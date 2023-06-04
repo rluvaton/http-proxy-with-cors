@@ -8,6 +8,9 @@ export default defineConfig({
   test: {
     globals: true,
 
-    testTimeout: DEBUG_MODE ? ONE_HOUR : 5000,
+    testTimeout: DEBUG_MODE
+      ? ONE_HOUR
+      : // 20 seconds as the browser can take some time
+        20_000,
   },
 });

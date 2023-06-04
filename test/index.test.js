@@ -115,6 +115,7 @@ describe('test', () => {
 
     proxyServerCleanup = () => {
       // Already exit
+      // noinspection EqualityComparisonWithCoercionJS
       if (subprocess.exitCode != undefined) {
         return;
       }
@@ -151,7 +152,7 @@ describe('test', () => {
         isDebug()
           ? // 1 hour
             60 * 60 * 1000
-          : 2000,
+          : 5000,
       );
 
       timeout.unref();
