@@ -10,7 +10,6 @@ export async function setup() {
   await execa('npm', ['publish', '--tag=e2e'], {
     env: {
       ...npmEnvironmentVars,
-      npm_config_provenance: 'false',
     },
     cwd: packageRootPath,
   });
