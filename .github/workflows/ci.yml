@@ -29,6 +29,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Test
+        run: npm run test
+
   deploy:
     permissions:
       contents: write # to be able to publish a GitHub release
