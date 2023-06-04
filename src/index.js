@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { parseArgs, printHelp } from './cli.js';
-import { createError } from './error.js';
+import { CLIError } from './error.js';
 import { runServer } from './server.js';
 
 /**
@@ -40,7 +40,7 @@ try {
 
   if (!servers.length) {
     // noinspection ExceptionCaughtLocallyJS
-    throw createError({
+    throw new CLIError({
       message: 'No servers to start',
       showHelp: true,
     });
