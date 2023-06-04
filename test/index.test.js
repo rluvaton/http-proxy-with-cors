@@ -108,12 +108,12 @@ describe('test', () => {
    * @return {Promise<{status: number, text: string, json: object, arrayBuffer: ArrayBuffer, headers: object}>}
    */
   async function sendRequest(...args) {
-    let responseHeaders = undefined;
-
-    // Need to get headers like that as for some reason, inside the browser context, we can't get all the headers,
-    // even when we see them in the dev tools
-    page.once('response', async (res) => {
-      responseHeaders = await res.allHeaders();
+    const getHeaders = new Promise((resolve) => {
+      // Need to get headers like that as for some reason, inside the browser context, we can't get all the headers,
+      // even when we see them in the dev tools
+      page.once('response', async (res) => {
+        resolve(await res.allHeaders());
+      });
     });
 
     const res = await page.evaluate(async (fetchArgs) => {
@@ -135,7 +135,7 @@ describe('test', () => {
       };
     }, args);
 
-    res.headers = responseHeaders;
+    res.headers = await getHeaders;
 
     return res;
   }
