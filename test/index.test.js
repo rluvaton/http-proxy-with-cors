@@ -1,10 +1,7 @@
 import Fastify from 'fastify';
 import FastifyCookies from '@fastify/cookie';
-import childProcess from 'node:child_process';
 import { Browser, chromium } from 'playwright';
-
-import { cliScript } from './const.js';
-import { getAvailablePorts, isDebug } from './helpers.js';
+import { isDebug, runCli } from './helpers.js';
 
 describe('test', () => {
   /** @type {import("fastify").FastifyInstance[]} */
@@ -95,69 +92,14 @@ describe('test', () => {
    * }>}
    */
   async function proxyServers(config) {
-    const numberOfAvailablePortsToSearch = config.filter(({ port }) => !port).length;
+    const { ports, cleanup } = await runCli(config);
 
-    const availablePorts = await getAvailablePorts(numberOfAvailablePortsToSearch);
+    proxyServerCleanup = cleanup;
 
-    config.forEach((serverConfig) => {
-      if (!serverConfig.port) {
-        serverConfig.port = availablePorts.shift();
-      }
-    });
-
-    const subprocess = childProcess.fork(
-      cliScript,
-      config.flatMap(({ port, upstream }) => [port, upstream]),
-      {
-        stdio: 'pipe',
-      },
-    );
-
-    proxyServerCleanup = () => {
-      // Already exit
-      // noinspection EqualityComparisonWithCoercionJS
-      if (subprocess.exitCode != undefined) {
-        return;
-      }
-      return new Promise((resolve) => {
-        subprocess.on('exit', () => {
-          resolve();
-        });
-        subprocess.kill('SIGTERM', {
-          forceKillAfterTimeout: 2000,
-        });
-      });
+    return {
+      ports: ports,
+      cleanup,
     };
-
-    return new Promise((resolve, reject) => {
-      function waitForReady(message) {
-        if (message !== 'ready') {
-          return;
-        }
-
-        subprocess.off('message', waitForReady);
-        clearTimeout(timeout);
-
-        resolve({
-          ports: config.map(({ port }) => port),
-          cleanup: proxyServerCleanup,
-        });
-      }
-
-      let timeout = setTimeout(
-        async () => {
-          await proxyServerCleanup();
-          reject('Failed to connect in 2 seconds, timeout');
-        },
-        isDebug()
-          ? // 1 hour
-            60 * 60 * 1000
-          : 5000,
-      );
-
-      timeout.unref();
-      subprocess.on('message', waitForReady);
-    });
   }
 
   /**

@@ -60,9 +60,6 @@ start(servers, {
 })
   .then(() => {
     console.log('All servers started successfully');
-
-    // For parent processes and tests
-    process.send('ready');
   })
   .catch((error) => {
     console.error(error);

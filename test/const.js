@@ -3,8 +3,9 @@ import path from 'node:path';
 import { readFileSync } from 'node:fs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-const rootPath = path.join(__dirname, '..');
+export const packageRootPath = path.join(__dirname, '..');
 
-const packageJson = JSON.parse(readFileSync(path.join(rootPath, 'package.json'), 'utf-8'));
+const packageJson = JSON.parse(readFileSync(path.join(packageRootPath, 'package.json'), 'utf-8'));
 
-export const cliScript = path.join(rootPath, Object.values(packageJson.bin)[0]);
+export const executableName = Object.keys(packageJson.bin)[0];
+export const packageName = packageJson.name;
