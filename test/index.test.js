@@ -1,7 +1,8 @@
 import Fastify from 'fastify';
 import FastifyCookies from '@fastify/cookie';
-import { Browser, chromium } from 'playwright';
+import { chromium } from 'playwright';
 import { isDebug, runCli } from './helpers.js';
+import { describe, beforeAll, afterEach, afterAll, it, expect } from 'vitest';
 
 describe('test', () => {
   /** @type {import("fastify").FastifyInstance[]} */
@@ -406,6 +407,37 @@ describe('test', () => {
           message: 'Hello World!',
         });
       });
+    });
+  });
+
+  describe('double slash at the start', () => {
+    it('should work with double slashes', async () => {
+      const upstreamPort = await createServer((fastify) => {
+        // return the URL so we know the query params are passed as is
+        fastify.get('*', async (req) => req.url);
+      });
+      const {
+        ports: [port],
+      } = await proxyServers([{ upstream: `http://localhost:${upstreamPort}` }]);
+
+      const response = await sendRequest(`http://localhost:${port}//`, {
+        method: 'GET',
+      });
+      expect(response.text).toEqual(`//`);
+    });
+
+    it('should work with double slashes and then route', async () => {
+      const upstreamPort = await createServer((fastify) => {
+        fastify.get('*', async (req) => req.url);
+      });
+      const {
+        ports: [port],
+      } = await runCli([{ upstream: `http://localhost:${upstreamPort}` }]);
+
+      const response = await sendRequest(`http://localhost:${port}//route`, {
+        method: 'GET',
+      });
+      expect(response.text).toEqual(`//route`);
     });
   });
 });
