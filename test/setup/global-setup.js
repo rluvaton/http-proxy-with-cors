@@ -47,5 +47,13 @@ async function cleanAlreadyInstalledPackageIfExists() {
 }
 
 async function installPackageGlobally(npmEnvironmentVars) {
-  await execa('npm', ['i', `--registry=${npmEnvironmentVars.npm_config_registry}`, '--global', `${packageName}@e2e`]);
+  await execa('npm', [
+    'i',
+    `--registry=${npmEnvironmentVars.npm_config_registry}`,
+    '--global',
+    `${packageName}@e2e`,
+
+    // Easier to debug
+    '--foreground-scripts',
+  ]);
 }
