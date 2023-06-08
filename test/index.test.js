@@ -432,7 +432,7 @@ describe('test', () => {
       });
       const {
         ports: [port],
-      } = await runCli([{ upstream: `http://localhost:${upstreamPort}` }]);
+      } = await proxyServers([{ upstream: `http://localhost:${upstreamPort}` }]);
 
       const response = await sendRequest(`http://localhost:${port}//route`, {
         method: 'GET',
