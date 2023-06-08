@@ -410,16 +410,21 @@ describe('test', () => {
     });
   });
 
-  describe('double slash at the start', () => {
-    it('should work with double slashes', async () => {
+  describe('double slash at the beginning', () => {
+    /** @type {number} */
+    let port;
+
+    beforeEach(async () => {
       const upstreamPort = await createServer((fastify) => {
-        // return the URL so we know the query params are passed as is
         fastify.get('*', async (req) => req.url);
       });
-      const {
-        ports: [port],
-      } = await proxyServers([{ upstream: `http://localhost:${upstreamPort}` }]);
 
+      ({
+        ports: [port],
+      } = await proxyServers([{ upstream: `http://localhost:${upstreamPort}` }]));
+    });
+
+    it('should work with double slashes', async () => {
       const response = await sendRequest(`http://localhost:${port}//`, {
         method: 'GET',
       });
@@ -427,13 +432,6 @@ describe('test', () => {
     });
 
     it('should work with double slashes and then route', async () => {
-      const upstreamPort = await createServer((fastify) => {
-        fastify.get('*', async (req) => req.url);
-      });
-      const {
-        ports: [port],
-      } = await proxyServers([{ upstream: `http://localhost:${upstreamPort}` }]);
-
       const response = await sendRequest(`http://localhost:${port}//route`, {
         method: 'GET',
       });
