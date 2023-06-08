@@ -14,7 +14,9 @@ export async function setup() {
   await execa('npm', ['publish', '--tag=e2e'], {
     env: npmEnvironmentVars,
     cwd: packageRootPath,
-  });
+  })
+    .pipeStdout(process.stdout)
+    .pipeStderr(process.stderr);
 
   console.log('Installing the npm package globally');
   try {
@@ -22,7 +24,9 @@ export async function setup() {
   } catch (e) {
     console.log('failed to install the package globally, try cleaning up');
 
-    const { stdout: prefixLocation } = await execa('npm', ['config', 'get', 'prefix']);
+    const { stdout: prefixLocation } = await execa('npm', ['config', 'get', 'prefix'])
+      .pipeStdout(process.stdout)
+      .pipeStderr(process.stderr);
 
     console.log('Removing the package from the global npm cache');
     await fsExtra.remove(path.join(prefixLocation, 'lib/node_modules', packageName));
@@ -42,7 +46,9 @@ export async function teardown() {
 
 async function cleanAlreadyInstalledPackageIfExists() {
   console.log('Uninstalling the npm package globally');
-  await execa('npm', ['uninstall', '--global', `${packageName}@e2e`]);
+  await execa('npm', ['uninstall', '--global', `${packageName}@e2e`])
+    .pipeStdout(process.stdout)
+    .pipeStderr(process.stderr);
   console.log('package uninstalled successfully');
 }
 
@@ -55,5 +61,7 @@ async function installPackageGlobally(npmEnvironmentVars) {
 
     // Easier to debug
     '--foreground-scripts',
-  ]);
+  ])
+    .pipeStdout(process.stdout)
+    .pipeStderr(process.stderr);
 }
