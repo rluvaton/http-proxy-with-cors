@@ -24,11 +24,6 @@
     "lint": "eslint \"src/**/*.js\" --fix",
     "semantic-release": "semantic-release"
   },
-  "overrides": {
-    "@fastify/http-proxy": {
-      "@fastify/reply-from": "9.1.0"
-    }
-  },
   "dependencies": {
     "@fastify/cors": "^8.3.0",
     "@fastify/http-proxy": "^9.1.0",
@@ -36,7 +31,8 @@
     "execa": "^7.1.1",
     "fastify": "^4.17.0",
     "patch-package": "^7.0.0",
-    "pino-pretty": "^10.0.0"
+    "pino-pretty": "^10.0.0",
+    "@fastify/reply-from": "9.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
