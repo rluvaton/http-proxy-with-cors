@@ -2,7 +2,7 @@ import Fastify from 'fastify';
 import FastifyCookies from '@fastify/cookie';
 import { chromium } from 'playwright';
 import { isDebug, runCli } from './helpers.js';
-import { describe, beforeAll, afterEach, afterAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterEach, afterAll, it, expect, beforeEach } from 'vitest';
 
 describe('test', () => {
   /** @type {import("fastify").FastifyInstance[]} */
