@@ -11,10 +11,12 @@
     "http-proxy-with-cors": "./src/index.js"
   },
   "files": [
-    "src"
+    "src",
+    "patches"
   ],
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "patch-package",
     "prepare": "husky install",
     "test": "vitest --run",
     "start": "node src/index.js",
@@ -29,7 +31,9 @@
     "chalk": "^5.2.0",
     "execa": "^7.1.1",
     "fastify": "^4.17.0",
-    "pino-pretty": "^10.0.0"
+    "patch-package": "^7.0.0",
+    "pino-pretty": "^10.0.0",
+    "@fastify/reply-from": "9.1.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
