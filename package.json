@@ -12,11 +12,12 @@
   },
   "files": [
     "src",
-    "patches"
+    "patches",
+    "scripts"
   ],
   "main": "src/index.js",
   "scripts": {
-    "postinstall": "patch-package",
+    "postinstall": "node ./scripts/fix-double-slashes.js",
     "prepare": "husky install",
     "test": "vitest --run",
     "start": "node src/index.js",
@@ -31,6 +32,8 @@
     "@fastify/reply-from": "9.1.0",
     "chalk": "^5.2.0",
     "fastify": "^4.17.0",
+    "global-dirs": "^3.0.1",
+    "is-path-inside": "^4.0.0",
     "patch-package": "^7.0.0",
     "pino-pretty": "^10.0.0"
   },

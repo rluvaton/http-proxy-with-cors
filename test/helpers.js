@@ -78,7 +78,7 @@ export async function runCli(config) {
     });
   };
 
-  await waitForReadyUntilTimeout(subprocess, proxyServerCleanup, config);
+  await waitForReadyUntilTimeout(subprocess, proxyServerCleanup);
 
   return {
     ports: config.map(({ port }) => port),
@@ -86,7 +86,7 @@ export async function runCli(config) {
   };
 }
 
-function waitForReadyUntilTimeout(subprocess, timeout, close) {
+function waitForReadyUntilTimeout(subprocess, close) {
   // either having a log: `All servers started successfully` or timeout
   // Don't forget to cleanup the server listeners
 
