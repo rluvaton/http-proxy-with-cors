@@ -34,7 +34,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
-    "@fastify/cookie": "^8.3.0",
+    "@fastify/cookie": "^9.0.4",
     "@types/node": "^20.2.5",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
