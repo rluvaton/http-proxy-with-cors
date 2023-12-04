@@ -37,7 +37,7 @@
     "@fastify/cookie": "^8.3.0",
     "@types/node": "^20.2.5",
     "eslint": "^8.41.0",
-    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "execa": "^8.0.1",
     "fs-extra": "^11.1.1",
